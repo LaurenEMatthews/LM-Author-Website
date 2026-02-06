@@ -272,6 +272,10 @@
 		    margin-top: 1rem;
 		}
 
+		.enfys-download-box .g-recaptcha {
+   			 margin-bottom: 1rem;
+		}
+
         .hero-media {
             display: flex;
             flex-direction: column;
@@ -659,6 +663,7 @@
 			opacity: 1;
 		}
 	}
+
 
 
 
