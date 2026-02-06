@@ -261,6 +261,10 @@
             background: rgba(196, 107, 79, 0.08);
         }
 
+		.enfys-download-box a.btn {
+		    width: 100%;
+		}
+
         .hero-media {
             display: flex;
             flex-direction: column;
@@ -648,3 +652,4 @@
 			opacity: 1;
 		}
 	}
+
