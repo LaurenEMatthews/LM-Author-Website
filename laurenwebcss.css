@@ -302,16 +302,16 @@
         }
 
 		.book-featured {
-			margin-top: 1.75rem;
-			display: flex;
-			justify-content: center;
+    		margin-top: 1.75rem;
+    		display: flex;
+    		justify-content: center;
 		}
 
-		.book-featured .book-card {
-			max-width: 600px;
-			width: 100%;
-		}
-		
+		.book-featured-inner {
+    		max-width: 600px;
+   			 width: 100%;
+		}		
+
 		.book-highlights {
 			margin: 0.5rem 0 1rem;
 			padding-left: 1.2rem;
@@ -523,3 +523,4 @@
     </style>
 </head>
 <body>
+
