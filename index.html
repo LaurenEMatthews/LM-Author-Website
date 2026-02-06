@@ -6,10 +6,11 @@
 	<link rel="stylesheet" href="laurenwebcss.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Official website of Lauren E Matthews, author of 'Embers of the Valleys', lyrical poet and storyteller.">
-
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
+<a href="#home" class="skip-link">Skip to main content</a>
 
 <header>
     <div class="nav-container">
@@ -17,7 +18,14 @@
             <div class="brand-title">Lauren E Matthews</div>
             <div class="brand-subtitle">Author · Poet · Story Teller</div>
         </div>
-        <nav>
+
+		<button class="nav-toggle" aria-expanded="false" aria-label="Open menu">
+			<span></span>
+			<span></span>
+			<span></span>
+			</button>
+		
+        <nav aria-label="Main navigation">
             <ul>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -29,6 +37,8 @@
         </nav>
     </div>
 </header>
+
+<div class="nav-backdrop"></div>
 
 <!-- HERO -->
 <section id="home" class="hero">
@@ -55,7 +65,7 @@
             <img src="lauren.jpg" alt="Portrait of Lauren E Matthews">
         </div>
         <div class="hero-book">
-			<img id="hero-carousel" src="bookcover.png" alt="Book cover carousel">
+			<img id="hero-carousel" src="bookcover.png" alt="Rotating book cover carousel from Lauren E Matthews">
 		</div>
         <div class="hero-caption">
             Poetry from the heart, to the heart.
@@ -63,7 +73,7 @@
     </div>
 </section>
 
-<main>
+<main role="main">
 
     <!-- ABOUT -->
     <section id="about">
@@ -264,15 +274,27 @@
                 <span class="pill">Emotional literacy</span>
             </div>
 
-            <a href="redacted for now.pdf" class="btn btn-primary" style="margin-top: 0.75rem;">
-                Download the Book
-            </a>
+            <div class="enfys-download-box">
+				<p>To protect the story from bots and unauthorised distribution, please complete the check below to access your free download.</p>
+
+			<div class="g-recaptcha" 
+				data-sitekey="6Ld232IsAAAAAF2csXY0T1rJSyxSQtTzZyhuoc0m" 
+				data-callback="enableDownload">
+			</div>
+
+			<a id="enfys-download-btn" 
+				href="/secure/enfys-2026-a7f3.pdf" 
+				class="btn btn-primary" 
+				style="margin-top: 1rem; display:none;">
+				Download the Book
+			</a>
+			</div>
 
             <a href="PTGuide.pdf" class="btn btn-primary" style="margin-top: 0.5rem;">
                 Download<br>The Parents Guide
             </a>
 
-            <a href="https://amazon.link.here" class="btn btn-primary" style="margin-top: 0.5rem;">
+            <a href="https://amzn.eu/d/0e7OM33f" class="btn btn-primary" style="margin-top: 0.5rem;">
                 Buy on Amazon
             </a>
 
@@ -283,7 +305,7 @@
 </section>
 
     <!-- EVENTS -->
-    <section id="events">
+    <section id="events" aria-label="Events and appearances">
         <h2 class="section-heading">Events & appearances</h2>
         <p class="section-subtitle">
             Readings, panels, and conversations at the intersection of poetry, story telling and culture of ancient lands.
@@ -311,7 +333,7 @@
     </section>
 
     <!-- BLOG / NOTEBOOK -->
-    <section id="blog">
+    <section id="blog" aria-label="Notebook articles">
         <h2 class="section-heading">Notebook</h2>
         <p class="section-subtitle">
             Occasional essays, process notes, and reflections from the valleys and beyond.
@@ -402,16 +424,16 @@
 
         <div class="contact-grid">
             <div>
-                <form action="https://formspree.io/f/xzddnkey" method="POST">
+                <form aria-label="Contact form" action="https://formspree.io/f/xzddnkey" method="POST">
 				<input type="hidden" name="_subject" value="New message from your website">
 				<input type="text" name="_gotcha" style="display:none">
                     <div>
                         <label for="name">Name</label>
-                        <input id="name" name="name" type="text" required>
+                        <input id="name" name="name" type="text" required aria-required="true">
                     </div>
                     <div>
                         <label for="email">Email</label>
-                        <input id="email" name="email" type="email" required>
+                        <input id="email" name="email" type="email" required aria-required="true">
                     </div>
                     <div>
                         <label for="reason">Reason for getting in touch</label>
@@ -419,7 +441,10 @@
                     </div>
                     <div>
                         <label for="message">Message</label>
-                        <textarea id="message" name="message" required></textarea>
+                        <textarea id="message" name="message" required aria-required="true" aria-describedby="message-help"></textarea>
+						<p id="message-help" class="visually-hidden">
+							Tell me what you’d like to talk about.
+						</p>
                     </div>
 					<input type="hidden" name="_replyto" value="">
                     <button type="submit" class="btn btn-primary">Send message</button>
@@ -444,7 +469,7 @@
 
 </main>
 
-<footer>
+<footer aria-label="Site footer">
     <div class="footer-inner">
         <div>
             © <span id="year"></span> Lauren E Matthews. All rights reserved.
@@ -460,32 +485,73 @@
 </script>
 
 <script>
-    const covers = [
-        "bookcover.png",        // Embers of the Valleys
-        "echoescover.png",      // Echoes of the Kingdoms
-        "enfys.png"             // Enfys and the Golden Treasure
-    ];
+const covers = [
+    "bookcover.png",
+    "echoescover.png",
+    "enfys.png"
+];
 
-    let index = 0;
-    const img = document.getElementById("hero-carousel");
+let index = 0;
+const img = document.getElementById("hero-carousel");
 
+// Check if user prefers reduced motion
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+if (!reduceMotion) {
     setInterval(() => {
         index = (index + 1) % covers.length;
         img.style.opacity = 0;
-
         setTimeout(() => {
             img.src = covers[index];
             img.style.opacity = 1;
         }, 300);
     }, 3500);
+}
+</script>
+
+<script>
+const navToggle = document.querySelector('.nav-toggle');
+const navMenu = document.querySelector('nav ul');
+const navBackdrop = document.querySelector('.nav-backdrop');
+
+navToggle.addEventListener('click', () => {
+    const isOpen = navMenu.classList.toggle('open');
+    navToggle.classList.toggle('open');
+    navBackdrop.classList.toggle('open');
+    document.body.classList.toggle('nav-open', isOpen);
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+});
+
+// Close menu when a link is clicked
+navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('open');
+        navToggle.classList.remove('open');
+        navBackdrop.classList.remove('open');
+        document.body.classList.remove('nav-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.setAttribute('aria-label', 'Open menu');
+    });
+});
+
+// Close menu when backdrop is clicked
+navBackdrop.addEventListener('click', () => {
+    navMenu.classList.remove('open');
+    navToggle.classList.remove('open');
+    navBackdrop.classList.remove('open');
+    document.body.classList.remove('nav-open');
+    navToggle.setAttribute('aria-expanded', 'false');
+    navToggle.setAttribute('aria-label', 'Open menu');
+});
+</script>
+
+<script>
+function enableDownload() {
+    document.getElementById('enfys-download-btn').style.display = 'inline-flex';
+}
 </script>
 
 </body>
 
 </html>
-
-
-
-
-
-
