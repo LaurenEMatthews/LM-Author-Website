@@ -282,11 +282,11 @@
 				data-callback="enableDownload">
 			</div>
 
-			<a id="enfys-download-btn" 
-				href="/secure/enfys-2026-a7f3.pdf" 
-				class="btn btn-primary" 
-				style="margin-top: 1rem; display:none;">
-				Download the Book
+			<a id="enfys-download-btn"
+   				href="/secure/enfys-2026-a7f3.pdf"
+   				class="btn btn-primary disabled-download"
+   				aria-disabled="true">
+   				Download the Book
 			</a>
 			</div>
 
@@ -551,17 +551,19 @@ function enableDownload() {
     const box = document.querySelector('.enfys-download-box');
     const button = document.getElementById('enfys-download-btn');
 
-    // Show the button
-    button.style.display = 'flex';
+    // Enable the button
+    button.classList.remove('disabled-download');
+    button.removeAttribute('aria-disabled');
 
-    // Hide everything else inside the box
+    // Hide the text and CAPTCHA
     box.querySelector('p').style.display = 'none';
     box.querySelector('.g-recaptcha').style.display = 'none';
 }
-</script>	
+</script>
 
 </body>
 
 </html>
+
 
 
