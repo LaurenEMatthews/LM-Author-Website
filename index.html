@@ -548,11 +548,20 @@ navBackdrop.addEventListener('click', () => {
 
 <script>
 function enableDownload() {
-    document.getElementById('enfys-download-btn').style.display = 'flex';
+    const box = document.querySelector('.enfys-download-box');
+    const button = document.getElementById('enfys-download-btn');
+
+    // Show the button
+    button.style.display = 'flex';
+
+    // Hide everything else inside the box
+    box.querySelector('p').style.display = 'none';
+    box.querySelector('.g-recaptcha').style.display = 'none';
 }
-</script>
-	
+</script>	
+
 </body>
 
 </html>
+
 
