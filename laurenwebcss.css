@@ -301,6 +301,11 @@
             gap: 0.75rem;
         }
 
+		.book-card > a.btn,
+		.book-actions {
+		    margin-top: auto;
+		}
+
 		.book-featured {
     		margin-top: 1.75rem;
     		display: flex;
@@ -523,4 +528,5 @@
     </style>
 </head>
 <body>
+
 
