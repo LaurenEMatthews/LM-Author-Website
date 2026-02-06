@@ -81,6 +81,10 @@
             justify-content: space-between;
         }
 
+		header .nav-container {
+    		width: 100%;
+		}
+
         .brand {
             display: flex;
             align-items: baseline;
@@ -622,51 +626,50 @@
 		}
 		}
 		
-		@media (max-width: 800px) {
-		    .nav-toggle {
-        	display: flex;
-    	}
+@media (max-width: 800px) {
+		.nav-toggle {
+			display: flex;
+		}
+		
+	    header .nav-container {
+			padding-left: 0.75rem;
+			padding-right: 0.75rem;
+		}
 
-    nav ul {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        background: rgba(5, 5, 9, 0.95);
-        padding: 0 1rem; /* padding collapses when closed */
-        border: 1px solid var(--border-soft);
-        border-radius: 8px;
-        position: absolute;
-        top: 60px;
-        right: 1.25rem;
+		nav ul {
+			display: flex;
+			flex-direction: column;
+			gap: 1rem;
+			background: rgba(5, 5, 9, 0.95);
+			padding: 0 1rem; /* padding collapses when closed */
+			border: 1px solid var(--border-soft);
+			border-radius: 8px;
+			position: absolute;
+			top: 60px;
+			right: 1.25rem;
 
-        /* Animation */
-        max-height: 0;
-        overflow: hidden;
-        opacity: 0;
-        transition: max-height 0.35s ease, opacity 0.35s ease, padding 0.35s ease;
-    }
+			/* Animation */
+			max-height: 0;
+			overflow: hidden;
+			opacity: 0;
+			transition: max-height 0.35s ease, opacity 0.35s ease, padding 0.35s ease;
+		}
 
-     nav ul.open {
-        max-height: 500px;   /* large enough to show all links */
-        opacity: 1;
-        padding: 1rem;       /* restores padding when open */
-    }
+		nav ul.open a:focus {
+			outline: 2px solid var(--accent);
+			outline-offset: 4px;
+			background: rgba(196, 107, 79, 0.15);
+			border-radius: 6px;
+		}
+		
+		nav ul li {
+			transform: translateY(-4px);
+			opacity: 0;
+			transition: transform 0.35s ease, opacity 0.35s ease;
+		}
 
-    nav ul.open a:focus {
-        outline: 2px solid var(--accent);
-        outline-offset: 4px;
-        background: rgba(196, 107, 79, 0.15);
-        border-radius: 6px;
-    }
-    
-    nav ul li {
-        transform: translateY(-4px);
-        opacity: 0;
-        transition: transform 0.35s ease, opacity 0.35s ease;
-    }
-
-    nav ul.open li {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
+		nav ul.open li {
+			transform: translateY(0);
+			opacity: 1;
+		}
+	}
