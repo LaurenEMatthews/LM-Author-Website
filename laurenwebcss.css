@@ -269,6 +269,7 @@
 
 		.enfys-download-box a.btn {
 		    width: 100%;
+		    margin-top: 1rem;
 		}
 
         .hero-media {
@@ -658,5 +659,6 @@
 			opacity: 1;
 		}
 	}
+
 
 
